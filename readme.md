@@ -34,3 +34,21 @@ Document => Record. A document in MongoDB is the same as a record in MySQL.
 `$ npm install aedes`
 
 `$ npm install mongodb`
+
+## Para Publicar / Hospedar na Nuvem (Cloud)
+
+### IBM Cloud - Cloud Foundry
+
+Exemplo : https://github.com/danitrod/cloud-foundry-example
+
+* Configurar arquivo manifest.yml
+    * Na primeira publicação (push) não incluir routes / route
+    * Após primeira publicação, obter nome do app e adicionar as seguintes linhas :
+    
+    `routes:`
+
+    `- route: nome_do_app.mybluemix.net`
+
+* Logar na IBM Cloud CLI: `ibmcloud login`
+* Destinar a um espaço Cloud Foundry da conta: `ibmcloud target --cf`
+* Subir a aplicação para a nuvem: `ibmcloud cf push`
