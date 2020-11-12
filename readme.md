@@ -25,7 +25,7 @@ Collection => Table. A collection in MongoDB is the same as a table in MySQL.
 
 Document => Record. A document in MongoDB is the same as a record in MySQL.
 
-## Projeto
+## Ao iniciar projeto:
 
 `$ npm init`
 
@@ -35,13 +35,13 @@ Document => Record. A document in MongoDB is the same as a record in MySQL.
 
 `$ npm install mongodb`
 
-## Para Publicar / Hospedar na Nuvem (Cloud)
+## Passo a passo para publicar/hospedar na nuvem:
 
 ### IBM Cloud - Cloud Foundry
 
-Exemplo : https://github.com/danitrod/cloud-foundry-example
-
-* Configurar arquivo manifest.yml
+* Instalar a IBM Cloud CLI. Verifique se está configurada corretamente executando `ibmcloud -v`
+* Instalar o plugin do Cloud Foundry executando `ibmcloud cf install`
+* Adcionar arquivo manifest.yml
     * Na primeira publicação (push) não incluir routes / route
     * Após primeira publicação, obter nome do app e adicionar as seguintes linhas :
     
@@ -49,6 +49,9 @@ Exemplo : https://github.com/danitrod/cloud-foundry-example
 
     `- route: nome_do_app.mybluemix.net`
 
+    * Adicionar linha : `health-check-type: process`
+    (You should change your health check type. if the application does not expose a Web interface you need to change the healthcheck type to process. Valid values are `port`, `process`, and `http` ).
 * Logar na IBM Cloud CLI: `ibmcloud login`
 * Destinar a um espaço Cloud Foundry da conta: `ibmcloud target --cf`
 * Subir a aplicação para a nuvem: `ibmcloud cf push`
+* Para subir atualizações no app, basta executar novamente `ibmcloud cf push`
