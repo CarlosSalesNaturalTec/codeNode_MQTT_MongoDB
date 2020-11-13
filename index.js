@@ -1,7 +1,7 @@
 // Biblioteca do Broker MQTT
 var aedes = require('aedes')()
 var server = require('net').createServer(aedes.handle)
-var port = 1883
+const port = 1883;
 
 // Biblioteca do Banco de Dados NoSQL: MongoDB
 var MongoClient = require('mongodb').MongoClient;
@@ -9,14 +9,30 @@ const usuario = "nome_do_usuario";
 const senha = "senha_usuario";
 const nomebanco = "nome_banco";
 const nomecollection = "nome_colecao";
-
 const url = "mongodb+srv://"+ usuario + ":" + senha + "@cluster0.bvczi.mongodb.net";
 
 // Listening
 server.listen(port, function() {
-  console.log('Servidor escutando na porta: ', port);
-  console.log('ID Broker: ' + aedes.id);
-  console.log('Hora: ' + new Date().toISOString());
+    console.log('Servidor escutando na porta: ', port);
+    console.log('ID Broker: ' + aedes.id);
+    console.log('Hora: ' + new Date().toISOString());
+
+    // Insere registro/documento na collection
+    MongoClient.connect(url, { useUnifiedTopology: true },  function(err, db) {
+        if (err) throw err;
+        var dbo = db.db(nomebanco);
+
+        var myobj = { data_log: new Date().toISOString(), msg_log: 'Servidor MQTT Iniciado na porta: ' + port };
+
+        dbo.collection(nomecollection).insertOne(myobj, function(err, res) {
+        if (err){
+            console.log(err.message);
+        } else {
+            console.log("LOG - Servidor MQTT Iniciado na porta: " + port);
+            db.close();
+        }
+        });
+    });
 });
 
 // Identifica conexões estabelecidas

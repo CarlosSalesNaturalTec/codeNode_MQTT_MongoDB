@@ -3,6 +3,8 @@
 
 ## Sobre o MQTT Aedes
 
+Sobre: https://developer.ibm.com/br/articles/iot-mqtt-why-good-for-iot/
+
 Aedes : https://github.com/moscajs/aedes
 
 ## Sobre o MongoDB:
@@ -55,3 +57,5 @@ Document => Record. A document in MongoDB is the same as a record in MySQL.
 * Destinar a um espaço Cloud Foundry da conta: `ibmcloud target --cf`
 * Subir a aplicação para a nuvem: `ibmcloud cf push`
 * Para subir atualizações no app, basta executar novamente `ibmcloud cf push`
+
+## Observação : Código funciona perfeitamente em localhost. Porém, ao subir código para nuvem, os clientes (publishers e subscribers) não conseguem se conectar ao broker.

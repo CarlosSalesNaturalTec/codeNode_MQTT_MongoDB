@@ -1,10 +1,10 @@
 applications:
-  - name: broker-mqtt-robopet
+  - name: broker-mqtt-carlossalesti
     path: .
     command: node index.js
     instances: 1
     random-route: true
     memory: 256M
+    health-check-type: process
     env:
       LOCATION: 'IBM Cloud'
-    health-check-type: process
